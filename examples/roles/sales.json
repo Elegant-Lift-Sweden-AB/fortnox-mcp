@@ -1,0 +1,379 @@
+{
+  "name": "sales",
+  "instructions": "ROLE: sales/inventory. You handle selling prices, stock corrections, customers, offers, orders and invoices (incl. bookkeeping, credit notes, payments) and may see stock quantities. Purchase prices, suppliers, purchase orders, goods receipt, article register edits and manual deliveries are not available here. Invoice PDFs: get_document_pdf(document_type=\"invoice\") returns the PDF as Fortnox prints it. E-mailing documents from Fortnox and offer/order PDFs are the administrator's step: prepare the document and report it ready. If a job needs something you don't have, say so and ask the Fortnox administrator instead of working around it.",
+  "tools": [
+    "article_movements", "bookkeep_invoice", "cancel_invoice", "cancel_offer", "cancel_order",
+    "cancel_stock_correction", "company_info", "create_customer", "create_invoice", "create_offer", "create_order",
+    "credit_invoice", "get_article", "get_customer", "get_document_pdf", "get_invoice",
+    "get_invoice_payment_evidence", "get_offer", "get_order", "get_price", "get_stock", "get_stock_correction",
+    "list_invoices", "list_offers", "list_orders", "list_stock_corrections", "mark_invoice_sent", "offer_to_order",
+    "order_to_invoice", "register_invoice_payment", "release_stock_correction", "search_articles",
+    "search_customers", "set_invoice_warehouse_ready", "set_price", "start_stock_correction", "stock_warnings",
+    "update_customer", "update_invoice", "update_offer", "update_order"
+  ],
+  "hide_fields": [
+    "PurchasePrice", "StockValue", "DirectCost", "FreightCost", "OtherCost", "CostCalculationMethod",
+    "SupplierNumber", "SupplierName", "Cost", "ContributionPercent", "ContributionValue", "suppliers",
+    "suppliers_note", "goods_receipts", "purchase_orders", "manual_deliveries", "price", "unitPrice", "unitCost",
+    "costPrice", "cost", "value", "totalValue", "stockValue", "unmatchedValue", "orderValue", "orderValueInSEK",
+    "supplierNumber", "supplierName", "supplier", "supplierEmail", "supplierItemId", "supplierItemName"
+  ],
+  "hide_csv_columns": "(?i)leverant|ink[öo]p|kostnad|v[äa]rde|supplier|purchase|cost|value",
+  "params": {
+    "search_articles": {
+      "forbid": ["supplier_number"],
+      "only": {"sort_by": [null, "articlenumber", "quantityinstock", "reservedquantity"]}
+    },
+    "create_customer": {
+      "writable": {
+        "extra_fields": [
+          "CustomerNumber",
+          "Name",
+          "Address1",
+          "Address2",
+          "ZipCode",
+          "City",
+          "Country",
+          "CountryCode",
+          "Email",
+          "EmailInvoice",
+          "EmailInvoiceCC",
+          "EmailInvoiceBCC",
+          "EmailOffer",
+          "EmailOfferCC",
+          "EmailOfferBCC",
+          "EmailOrder",
+          "EmailOrderCC",
+          "EmailOrderBCC",
+          "Phone1",
+          "Phone2",
+          "Fax",
+          "WWW",
+          "OrganisationNumber",
+          "VATNumber",
+          "VATType",
+          "Type",
+          "Currency",
+          "TermsOfPayment",
+          "TermsOfDelivery",
+          "WayOfDelivery",
+          "OurReference",
+          "YourReference",
+          "Comments",
+          "Active",
+          "DeliveryName",
+          "DeliveryAddress1",
+          "DeliveryAddress2",
+          "DeliveryZipCode",
+          "DeliveryCity",
+          "DeliveryCountry",
+          "DeliveryCountryCode",
+          "DeliveryPhone1",
+          "DeliveryPhone2",
+          "DeliveryFax",
+          "InvoiceRemark",
+          "InvoiceDiscount",
+          "InvoiceFreight",
+          "InvoiceAdministrationFee",
+          "PriceList",
+          "ShowPriceVATIncluded",
+          "Language",
+          "SalesAccount",
+          "GLN",
+          "GLNDelivery",
+          "ExternalReference",
+          "VisitingAddress",
+          "VisitingCity",
+          "VisitingCountry",
+          "VisitingCountryCode",
+          "VisitingZipCode",
+          "CostCenter",
+          "Project",
+          {
+            "DefaultDeliveryTypes": ["Invoice", "Offer", "Order"]
+          },
+          {
+            "DefaultTemplates": ["CashInvoice", "Invoice", "Offer", "Order"]
+          }
+        ]
+      }
+    },
+    "update_customer": {
+      "writable": {
+        "fields": [
+          "CustomerNumber",
+          "Name",
+          "Address1",
+          "Address2",
+          "ZipCode",
+          "City",
+          "Country",
+          "CountryCode",
+          "Email",
+          "EmailInvoice",
+          "EmailInvoiceCC",
+          "EmailInvoiceBCC",
+          "EmailOffer",
+          "EmailOfferCC",
+          "EmailOfferBCC",
+          "EmailOrder",
+          "EmailOrderCC",
+          "EmailOrderBCC",
+          "Phone1",
+          "Phone2",
+          "Fax",
+          "WWW",
+          "OrganisationNumber",
+          "VATNumber",
+          "VATType",
+          "Type",
+          "Currency",
+          "TermsOfPayment",
+          "TermsOfDelivery",
+          "WayOfDelivery",
+          "OurReference",
+          "YourReference",
+          "Comments",
+          "Active",
+          "DeliveryName",
+          "DeliveryAddress1",
+          "DeliveryAddress2",
+          "DeliveryZipCode",
+          "DeliveryCity",
+          "DeliveryCountry",
+          "DeliveryCountryCode",
+          "DeliveryPhone1",
+          "DeliveryPhone2",
+          "DeliveryFax",
+          "InvoiceRemark",
+          "InvoiceDiscount",
+          "InvoiceFreight",
+          "InvoiceAdministrationFee",
+          "PriceList",
+          "ShowPriceVATIncluded",
+          "Language",
+          "SalesAccount",
+          "GLN",
+          "GLNDelivery",
+          "ExternalReference",
+          "VisitingAddress",
+          "VisitingCity",
+          "VisitingCountry",
+          "VisitingCountryCode",
+          "VisitingZipCode",
+          "CostCenter",
+          "Project",
+          {
+            "DefaultDeliveryTypes": ["Invoice", "Offer", "Order"]
+          },
+          {
+            "DefaultTemplates": ["CashInvoice", "Invoice", "Offer", "Order"]
+          }
+        ]
+      }
+    },
+    "create_offer": {
+      "writable": {
+        "rows": {
+          "each": [
+            "article_number",
+            "description",
+            "quantity",
+            "price",
+            "discount",
+            "discount_type",
+            "unit",
+            {
+              "extra": [
+                "RowId", "ArticleNumber", "Description", "Quantity", "DeliveredQuantity", "OrderedQuantity",
+                "Price", "Discount", "DiscountType", "VAT", "VATCode", "Unit", "AccountNumber", "CostCenter",
+                "Project", "HouseWork", "HouseWorkType", "HouseWorkHoursToReport", "StockPointCode"
+              ]
+            }
+          ]
+        },
+        "extra_fields": [
+          "CustomerNumber", "CustomerName", "ExpireDate", "DeliveryDate", "OrderDate", "OfferDate", "InvoiceDate",
+          "DueDate", "OurReference", "YourReference", "YourReferenceNumber", "Remarks", "Comments", "CopyRemarks",
+          "YourOrderNumber", "TermsOfPayment", "TermsOfDelivery", "WayOfDelivery", "Freight", "AdministrationFee",
+          "Language", "Currency", "CurrencyRate", "CurrencyUnit", "DeliveryState", "DeliveryName",
+          "DeliveryAddress1", "DeliveryAddress2", "DeliveryZipCode", "DeliveryCity", "DeliveryCountry", "Address1",
+          "Address2", "ZipCode", "City", "Country", "Phone1", "Phone2", "ExternalInvoiceReference1",
+          "ExternalInvoiceReference2", "InvoiceReference", "OrderReference", "OfferReference", "PriceList",
+          "VATIncluded", "WarehouseReady", "NotCompleted", "Project", "CostCenter", "InvoiceType", "OrderType",
+          "PaymentWay", "InvoicePeriodStart", "InvoicePeriodEnd", "Labels", "StockPointCode"
+        ]
+      }
+    },
+    "create_order": {
+      "writable": {
+        "rows": {
+          "each": [
+            "article_number",
+            "description",
+            "quantity",
+            "price",
+            "discount",
+            "discount_type",
+            "unit",
+            {
+              "extra": [
+                "RowId", "ArticleNumber", "Description", "Quantity", "DeliveredQuantity", "OrderedQuantity",
+                "Price", "Discount", "DiscountType", "VAT", "VATCode", "Unit", "AccountNumber", "CostCenter",
+                "Project", "HouseWork", "HouseWorkType", "HouseWorkHoursToReport", "StockPointCode"
+              ]
+            }
+          ]
+        },
+        "extra_fields": [
+          "CustomerNumber", "CustomerName", "ExpireDate", "DeliveryDate", "OrderDate", "OfferDate", "InvoiceDate",
+          "DueDate", "OurReference", "YourReference", "YourReferenceNumber", "Remarks", "Comments", "CopyRemarks",
+          "YourOrderNumber", "TermsOfPayment", "TermsOfDelivery", "WayOfDelivery", "Freight", "AdministrationFee",
+          "Language", "Currency", "CurrencyRate", "CurrencyUnit", "DeliveryState", "DeliveryName",
+          "DeliveryAddress1", "DeliveryAddress2", "DeliveryZipCode", "DeliveryCity", "DeliveryCountry", "Address1",
+          "Address2", "ZipCode", "City", "Country", "Phone1", "Phone2", "ExternalInvoiceReference1",
+          "ExternalInvoiceReference2", "InvoiceReference", "OrderReference", "OfferReference", "PriceList",
+          "VATIncluded", "WarehouseReady", "NotCompleted", "Project", "CostCenter", "InvoiceType", "OrderType",
+          "PaymentWay", "InvoicePeriodStart", "InvoicePeriodEnd", "Labels", "StockPointCode"
+        ]
+      }
+    },
+    "create_invoice": {
+      "writable": {
+        "rows": {
+          "each": [
+            "article_number",
+            "description",
+            "quantity",
+            "price",
+            "discount",
+            "discount_type",
+            "unit",
+            {
+              "extra": [
+                "RowId", "ArticleNumber", "Description", "Quantity", "DeliveredQuantity", "OrderedQuantity",
+                "Price", "Discount", "DiscountType", "VAT", "VATCode", "Unit", "AccountNumber", "CostCenter",
+                "Project", "HouseWork", "HouseWorkType", "HouseWorkHoursToReport", "StockPointCode"
+              ]
+            }
+          ]
+        },
+        "extra_fields": [
+          "CustomerNumber", "CustomerName", "ExpireDate", "DeliveryDate", "OrderDate", "OfferDate", "InvoiceDate",
+          "DueDate", "OurReference", "YourReference", "YourReferenceNumber", "Remarks", "Comments", "CopyRemarks",
+          "YourOrderNumber", "TermsOfPayment", "TermsOfDelivery", "WayOfDelivery", "Freight", "AdministrationFee",
+          "Language", "Currency", "CurrencyRate", "CurrencyUnit", "DeliveryState", "DeliveryName",
+          "DeliveryAddress1", "DeliveryAddress2", "DeliveryZipCode", "DeliveryCity", "DeliveryCountry", "Address1",
+          "Address2", "ZipCode", "City", "Country", "Phone1", "Phone2", "ExternalInvoiceReference1",
+          "ExternalInvoiceReference2", "InvoiceReference", "OrderReference", "OfferReference", "PriceList",
+          "VATIncluded", "WarehouseReady", "NotCompleted", "Project", "CostCenter", "InvoiceType", "OrderType",
+          "PaymentWay", "InvoicePeriodStart", "InvoicePeriodEnd", "Labels", "StockPointCode"
+        ]
+      }
+    },
+    "update_offer": {
+      "writable": {
+        "rows": {
+          "each": [
+            "article_number",
+            "description",
+            "quantity",
+            "price",
+            "discount",
+            "discount_type",
+            "unit",
+            {
+              "extra": [
+                "RowId", "ArticleNumber", "Description", "Quantity", "DeliveredQuantity", "OrderedQuantity",
+                "Price", "Discount", "DiscountType", "VAT", "VATCode", "Unit", "AccountNumber", "CostCenter",
+                "Project", "HouseWork", "HouseWorkType", "HouseWorkHoursToReport", "StockPointCode"
+              ]
+            }
+          ]
+        },
+        "fields": [
+          "CustomerNumber", "CustomerName", "ExpireDate", "DeliveryDate", "OrderDate", "OfferDate", "InvoiceDate",
+          "DueDate", "OurReference", "YourReference", "YourReferenceNumber", "Remarks", "Comments", "CopyRemarks",
+          "YourOrderNumber", "TermsOfPayment", "TermsOfDelivery", "WayOfDelivery", "Freight", "AdministrationFee",
+          "Language", "Currency", "CurrencyRate", "CurrencyUnit", "DeliveryState", "DeliveryName",
+          "DeliveryAddress1", "DeliveryAddress2", "DeliveryZipCode", "DeliveryCity", "DeliveryCountry", "Address1",
+          "Address2", "ZipCode", "City", "Country", "Phone1", "Phone2", "ExternalInvoiceReference1",
+          "ExternalInvoiceReference2", "InvoiceReference", "OrderReference", "OfferReference", "PriceList",
+          "VATIncluded", "WarehouseReady", "NotCompleted", "Project", "CostCenter", "InvoiceType", "OrderType",
+          "PaymentWay", "InvoicePeriodStart", "InvoicePeriodEnd", "Labels", "StockPointCode"
+        ]
+      }
+    },
+    "update_order": {
+      "writable": {
+        "rows": {
+          "each": [
+            "article_number",
+            "description",
+            "quantity",
+            "price",
+            "discount",
+            "discount_type",
+            "unit",
+            {
+              "extra": [
+                "RowId", "ArticleNumber", "Description", "Quantity", "DeliveredQuantity", "OrderedQuantity",
+                "Price", "Discount", "DiscountType", "VAT", "VATCode", "Unit", "AccountNumber", "CostCenter",
+                "Project", "HouseWork", "HouseWorkType", "HouseWorkHoursToReport", "StockPointCode"
+              ]
+            }
+          ]
+        },
+        "fields": [
+          "CustomerNumber", "CustomerName", "ExpireDate", "DeliveryDate", "OrderDate", "OfferDate", "InvoiceDate",
+          "DueDate", "OurReference", "YourReference", "YourReferenceNumber", "Remarks", "Comments", "CopyRemarks",
+          "YourOrderNumber", "TermsOfPayment", "TermsOfDelivery", "WayOfDelivery", "Freight", "AdministrationFee",
+          "Language", "Currency", "CurrencyRate", "CurrencyUnit", "DeliveryState", "DeliveryName",
+          "DeliveryAddress1", "DeliveryAddress2", "DeliveryZipCode", "DeliveryCity", "DeliveryCountry", "Address1",
+          "Address2", "ZipCode", "City", "Country", "Phone1", "Phone2", "ExternalInvoiceReference1",
+          "ExternalInvoiceReference2", "InvoiceReference", "OrderReference", "OfferReference", "PriceList",
+          "VATIncluded", "WarehouseReady", "NotCompleted", "Project", "CostCenter", "InvoiceType", "OrderType",
+          "PaymentWay", "InvoicePeriodStart", "InvoicePeriodEnd", "Labels", "StockPointCode"
+        ]
+      }
+    },
+    "update_invoice": {
+      "writable": {
+        "rows": {
+          "each": [
+            "article_number",
+            "description",
+            "quantity",
+            "price",
+            "discount",
+            "discount_type",
+            "unit",
+            {
+              "extra": [
+                "RowId", "ArticleNumber", "Description", "Quantity", "DeliveredQuantity", "OrderedQuantity",
+                "Price", "Discount", "DiscountType", "VAT", "VATCode", "Unit", "AccountNumber", "CostCenter",
+                "Project", "HouseWork", "HouseWorkType", "HouseWorkHoursToReport", "StockPointCode"
+              ]
+            }
+          ]
+        },
+        "fields": [
+          "CustomerNumber", "CustomerName", "ExpireDate", "DeliveryDate", "OrderDate", "OfferDate", "InvoiceDate",
+          "DueDate", "OurReference", "YourReference", "YourReferenceNumber", "Remarks", "Comments", "CopyRemarks",
+          "YourOrderNumber", "TermsOfPayment", "TermsOfDelivery", "WayOfDelivery", "Freight", "AdministrationFee",
+          "Language", "Currency", "CurrencyRate", "CurrencyUnit", "DeliveryState", "DeliveryName",
+          "DeliveryAddress1", "DeliveryAddress2", "DeliveryZipCode", "DeliveryCity", "DeliveryCountry", "Address1",
+          "Address2", "ZipCode", "City", "Country", "Phone1", "Phone2", "ExternalInvoiceReference1",
+          "ExternalInvoiceReference2", "InvoiceReference", "OrderReference", "OfferReference", "PriceList",
+          "VATIncluded", "WarehouseReady", "NotCompleted", "Project", "CostCenter", "InvoiceType", "OrderType",
+          "PaymentWay", "InvoicePeriodStart", "InvoicePeriodEnd", "Labels", "StockPointCode"
+        ]
+      }
+    },
+    "get_document_pdf": {
+      "only": {
+        "document_type": ["invoice"]
+      }
+    }
+  }
+}

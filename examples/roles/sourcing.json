@@ -1,0 +1,86 @@
+{
+  "name": "sourcing",
+  "instructions": "ROLE: sourcing. You handle costs, suppliers, articles, purchase orders, goods receipt and may see stock quantities. Selling prices, customers, sales documents, stock corrections and manual deliveries are not available here; if a job needs them, say so and ask the Fortnox administrator instead of working around it.",
+  "tools": [
+    "article_movements", "company_info", "complete_goods_receipt", "complete_purchase_order", "create_article",
+    "create_goods_receipt", "create_purchase_order", "create_supplier", "deactivate_article", "get_article",
+    "get_currency_rate", "get_goods_receipt", "get_purchase_order", "get_stock", "get_supplier",
+    "get_supplier_invoice", "list_goods_receipts", "list_purchase_orders", "list_supplier_invoices",
+    "release_goods_receipt", "search_articles", "search_suppliers", "send_purchase_order", "set_article_supplier",
+    "set_purchase_order_response", "stock_warnings", "update_article", "update_purchase_order", "update_supplier",
+    "void_goods_receipt", "void_purchase_order"
+  ],
+  "hide_fields": ["SalesPrice", "manual_deliveries"],
+  "hide_csv_columns": "(?i)f[öo]rs[äa]lj|sales",
+  "params": {
+    "create_article": {
+      "forbid": ["sales_price", "webshop_article"],
+      "writable": {
+        "extra_fields": [
+          "Manufacturer", "ManufacturerArticleNumber", "SupplierNumber",
+          "Weight", "Height", "Width", "Depth", "Unit", "Note", "PurchasePrice", "DirectCost", "FreightCost",
+          "OtherCost", "CostCalculationMethod", "StockWarning", "StockGoods", "StockPlace", "Active", "Type",
+          "Bulky", "Expired", "CommodityCode", "DefaultStockPoint", "DefaultStockLocation"
+        ]
+      }
+    },
+    "update_article": {
+      "writable": {
+        "extra_fields": [
+          "Manufacturer", "ManufacturerArticleNumber", "SupplierNumber",
+          "Weight", "Height", "Width", "Depth", "Unit", "Note", "PurchasePrice", "DirectCost", "FreightCost",
+          "OtherCost", "CostCalculationMethod", "StockWarning", "StockGoods", "StockPlace", "Active", "Type",
+          "Bulky", "Expired", "CommodityCode", "DefaultStockPoint", "DefaultStockLocation"
+        ]
+      }
+    },
+    "create_supplier": {
+      "writable": {
+        "extra_fields": [
+          "SupplierNumber", "Name", "Address1", "Address2", "ZipCode", "City", "Country", "CountryCode", "Email",
+          "Phone1", "Phone2", "Fax", "WWW", "OrganisationNumber", "VATNumber", "VATType", "Currency",
+          "TermsOfPayment", "OurReference", "YourReference", "OurCustomerNumber", "Comments", "Active",
+          "BankAccountNumber", "Bank", "BranchCode", "ClearingNumber", "BG", "PG", "IBAN", "BIC", "CostCenter",
+          "Project", "PreDefinedAccount", "WorkPlace", "DisablePaymentFile", "VisitingAddress", "VisitingCity",
+          "VisitingCountry", "VisitingCountryCode", "VisitingZipCode"
+        ]
+      }
+    },
+    "update_supplier": {
+      "writable": {
+        "fields": [
+          "SupplierNumber", "Name", "Address1", "Address2", "ZipCode", "City", "Country", "CountryCode", "Email",
+          "Phone1", "Phone2", "Fax", "WWW", "OrganisationNumber", "VATNumber", "VATType", "Currency",
+          "TermsOfPayment", "OurReference", "YourReference", "OurCustomerNumber", "Comments", "Active",
+          "BankAccountNumber", "Bank", "BranchCode", "ClearingNumber", "BG", "PG", "IBAN", "BIC", "CostCenter",
+          "Project", "PreDefinedAccount", "WorkPlace", "DisablePaymentFile", "VisitingAddress", "VisitingCity",
+          "VisitingCountry", "VisitingCountryCode", "VisitingZipCode"
+        ]
+      }
+    },
+    "create_purchase_order": {
+      "writable": {
+        "rows": {
+          "each": ["article_number", "quantity", "price", "description"]
+        }
+      }
+    },
+    "update_purchase_order": {
+      "writable": {
+        "fields": [
+          "deliveryDate", "orderDate", "internalReference", "ourReference", "yourReference", "note",
+          "messageToSupplier", "confirmationEmail", "paymentTermsCode", "languageCode", "deliveryName",
+          "deliveryAddress", "deliveryAddress2", "deliveryZipCode", "deliveryCity", "deliveryCountryCode",
+          "costCenterCode", "projectId", "dropship"
+        ]
+      }
+    },
+    "create_goods_receipt": {
+      "writable": {
+        "received": {
+          "each": ["article_number", "quantity"]
+        }
+      }
+    }
+  }
+}
